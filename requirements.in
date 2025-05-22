@@ -1,0 +1,7 @@
+fastapi 
+uvicorn
+pygame 
+pillow 
+numpy 
+matplotlib 
+noise
