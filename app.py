@@ -119,13 +119,17 @@ def run_pygame(shared_dict):
         img_bytes = io.BytesIO()
         pygame.image.save(screen, img_bytes)
         img_bytes.seek(0)
-        im = Image.open(img_bytes).convert("RGB")
-        jpeg_bytes = io.BytesIO()
-        im.save(jpeg_bytes, format="JPEG", quality=85)
-        jpeg_bytes.seek(0)
-        shared_dict['last_jpeg'] = jpeg_bytes.read()
-        # print(f"Frame produced: {len(shared_dict['last_jpeg'])} bytes")
+        # JPEG formatına dönüştür
+        with Image.open(img_bytes) as im:
+            im = im.convert("RGB")
+            jpeg_bytes = io.BytesIO()
+            im.save(jpeg_bytes, format="JPEG", quality=85)
+            jpeg_bytes.seek(0)
+            shared_dict['last_jpeg'] = jpeg_bytes.read()
+            jpeg_bytes.close()
+        img_bytes.close()
         pygame.display.flip()
+
 
     pygame.quit()
 
