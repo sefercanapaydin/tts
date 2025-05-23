@@ -174,7 +174,7 @@ def generate_noise(payload: ResponsePayload):
     filename = f"circle_{base_name}_{uuid.uuid4().hex[:8]}.png"
     filepath = os.path.join(IMAGE_FOLDER, filename)
 
-    scale = sum(payload.responses) * 0.05
+    scale = sum(payload.responses) * 0.02
 
     try:
         save_circle_with_text_to_images(
